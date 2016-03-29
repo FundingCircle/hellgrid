@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'bundler/setup'
+require 'find'
+require 'bundler_dependency_matrix/project'
+require 'bundler_dependency_matrix/matrix'
+require 'bundler_dependency_matrix/views/console'
+
+ARGV.each do |folder|
+  matrix = BundlerDependencyMatrix::Matrix.new
+
+  Find.find(folder) do |path|
+    if File.directory?(path) && File.exists?(File.join(path, 'Gemfile.lock'))
+      matrix.add_project(BundlerDependencyMatrix::Project.new(path))
+      Find.prune
+    end
+  end
+
+  view = BundlerDependencyMatrix::Views::Console.new(matrix.sorted_by_most_used)
+
+  view.render
+end
