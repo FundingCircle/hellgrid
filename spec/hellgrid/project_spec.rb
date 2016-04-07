@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe Hellgrid::Project do
-  subject(:project) { described_class.new(project_path) }
+  subject(:project) { described_class.new(root_path, project_path) }
 
+  let(:root_path) { 'spec' }
   let(:project_path) { 'spec/tmp/foo/' }
   let(:lockfile_path) { File.join project_path, 'Gemfile.lock' }
 
@@ -36,6 +37,12 @@ DEPENDENCIES
   rspec (= 3.0.0)
 
 FOO_GEMFILE
+  end
+
+  describe '#name' do
+    it 'returns the relative path from the root' do
+      expect(subject.name).to eq('tmp/foo')
+    end
   end
 
   describe '#dependency_matrix' do

@@ -4,7 +4,7 @@ describe 'bin/hellgrid' do
   before do
     delete_tmp_folder
 
-    create_file 'spec/tmp/foo/Gemfile.lock', <<-FOO_GEMFILE
+    create_file 'spec/tmp/in/foo/Gemfile.lock', <<-FOO_GEMFILE
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,7 +61,7 @@ BAR_GEMFILE
 
   it 'returns a matrix with the versions of all used gems' do
     expected_result = <<-TABLE
-         x          |  bar   |  foo   
+         x          |  bar   | in/foo 
 --------------------+--------+--------
       diff-lcs      | 1.2.5  | 1.2.5  
         rake        | 10.0.0 | 11.1.0 
@@ -77,7 +77,7 @@ TABLE
 
   it 'could be run from random directory' do
     expected_result = <<-TABLE
-         x          |  bar   |  foo   
+         x          |  bar   | in/foo 
 --------------------+--------+--------
       diff-lcs      | 1.2.5  | 1.2.5  
         rake        | 10.0.0 | 11.1.0 

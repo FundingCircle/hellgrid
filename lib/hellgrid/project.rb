@@ -2,12 +2,13 @@ module Hellgrid
   class Project
     attr_reader :path
 
-    def initialize(path)
+    def initialize(root, path)
+      @root = root
       @path = path
     end
 
     def name
-      File.basename(File.expand_path(path))
+      File.expand_path(path).gsub(File.expand_path(root) + '/', '')
     end
 
     def dependency_matrix
@@ -16,8 +17,10 @@ module Hellgrid
 
     private
 
+    attr_reader :root
+
     def lockfile
-      File.join(@path, 'Gemfile.lock')
+      File.join(path, 'Gemfile.lock')
     end
 
     def parsed_lockfile

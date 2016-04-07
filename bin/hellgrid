@@ -14,7 +14,7 @@ ARGV.each do |folder|
 
   Find.find(folder) do |path|
     if File.directory?(path) && File.exists?(File.join(path, 'Gemfile.lock'))
-      matrix.add_project(Hellgrid::Project.new(path))
+      matrix.add_project(Hellgrid::Project.new(folder, path))
       Find.prune
     end
   end
