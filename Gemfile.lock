@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bundler_dependency_matrix (0.0.0)
+    hellgrid (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -25,9 +25,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.11.0)
-  bundler_dependency_matrix!
-  rspec (~> 3.4.0)
+  bundler (~> 1.11, >= 1.11.0)
+  hellgrid!
+  rspec (~> 3.4, >= 3.4.0)
 
 BUNDLED WITH
    1.11.2

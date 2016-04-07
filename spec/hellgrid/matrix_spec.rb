@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BundlerDependencyMatrix::Matrix do
+describe Hellgrid::Matrix do
   subject(:matrix) { described_class.new }
   let(:project) { [] }
 

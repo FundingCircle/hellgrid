@@ -1,4 +1,4 @@
-module BundlerDependencyMatrix
+module Hellgrid
   class Matrix
     attr_reader :projects
 

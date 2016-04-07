@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'bin/bundler_dependency_matrix' do
+describe 'bin/hellgrid' do
   before do
     delete_tmp_folder
 
@@ -59,7 +59,7 @@ DEPENDENCIES
 BAR_GEMFILE
   end
 
-  it 'returns bundler dependency matrix' do
+  it 'returns a matrix with the versions of all used gems' do
     expected_result = <<-TABLE
          x          |  bar   |  foo   
 --------------------+--------+--------
@@ -72,7 +72,7 @@ BAR_GEMFILE
    rspec-support    |   x    | 3.0.4  
 TABLE
 
-    expect(`#{PROJECT_ROOT}/bin/bundler_dependency_matrix #{PROJECT_ROOT}/spec/tmp`).to eq(expected_result)
+    expect(`#{PROJECT_ROOT}/bin/hellgrid #{PROJECT_ROOT}/spec/tmp`).to eq(expected_result)
   end
 
   it 'could be run from random directory' do
@@ -89,7 +89,7 @@ TABLE
 TABLE
 
     Bundler.with_clean_env do
-      expect(`cd ~ && #{PROJECT_ROOT}/bin/bundler_dependency_matrix #{PROJECT_ROOT}/spec/tmp`).to eq(expected_result)
+      expect(`cd ~ && #{PROJECT_ROOT}/bin/hellgrid #{PROJECT_ROOT}/spec/tmp`).to eq(expected_result)
     end
   end
 end
