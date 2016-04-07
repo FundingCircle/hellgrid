@@ -1,10 +1,10 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bundler_dependency_matrix/version'
+require 'hellgrid/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'bundler_dependency_matrix'
-  s.version       = BundlerDependencyMatrix::VERSION
+  s.name          = 'hellgrid'
+  s.version       = Hellgrid::VERSION
   s.date          = '2016-03-28'
   s.summary       = 'Gem version dependecy matrix'
   s.description   = ''
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
-  s.homepage      = 'http://github.com/dobrinov/bundler_dependency_matrix'
+  s.homepage      = 'http://github.com/dobrinov/hellgrid'
   s.license       = 'MIT'
 
   s.add_development_dependency 'rspec', '~> 3.4', '>= 3.4.0'

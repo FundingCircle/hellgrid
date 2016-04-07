@@ -1,4 +1,4 @@
-module BundlerDependencyMatrix
+module Hellgrid
   module Views
     class Console
       attr_reader :matrix

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BundlerDependencyMatrix::Project do
+describe Hellgrid::Project do
   subject(:project) { described_class.new(project_path) }
 
   let(:project_path) { 'spec/tmp/foo/' }

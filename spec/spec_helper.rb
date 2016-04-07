@@ -1,8 +1,8 @@
 require 'fileutils'
-require 'bundler_dependency_matrix'
-require 'bundler_dependency_matrix/project'
-require 'bundler_dependency_matrix/matrix'
-require 'bundler_dependency_matrix/views/console'
+require 'hellgrid'
+require 'hellgrid/project'
+require 'hellgrid/matrix'
+require 'hellgrid/views/console'
 
 PROJECT_ROOT = File.expand_path('../..', __FILE__)
 

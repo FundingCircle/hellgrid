@@ -7,21 +7,19 @@ require 'rubygems'
 require 'bundler/setup'
 require 'find'
 
-require 'bundler_dependency_matrix/project'
-require 'bundler_dependency_matrix/matrix'
-require 'bundler_dependency_matrix/views/console'
+require 'hellgrid'
 
 ARGV.each do |folder|
-  matrix = BundlerDependencyMatrix::Matrix.new
+  matrix = Hellgrid::Matrix.new
 
   Find.find(folder) do |path|
     if File.directory?(path) && File.exists?(File.join(path, 'Gemfile.lock'))
-      matrix.add_project(BundlerDependencyMatrix::Project.new(path))
+      matrix.add_project(Hellgrid::Project.new(path))
       Find.prune
     end
   end
 
-  view = BundlerDependencyMatrix::Views::Console.new(matrix.sorted_by_most_used)
+  view = Hellgrid::Views::Console.new(matrix.sorted_by_most_used)
 
   view.render
 end

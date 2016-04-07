@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BundlerDependencyMatrix::Views::Console do
+describe Hellgrid::Views::Console do
   subject(:console) { described_class.new(matrix.sorted_by_most_used) }
   let(:matrix) do
     double :matrix,

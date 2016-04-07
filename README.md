@@ -1,19 +1,22 @@
-# Bundler dependency matrix
+# Hellgrid
+
 Utility which will output a table containing gem versions used across your projects.
 
-![Build Status](https://circleci.com/gh/dobrinov/bundler_dependency_matrix.svg?style=shield&circle-token=:circle-token)
+![Build Status](https://circleci.com/gh/dobrinov/hellgrid.svg?style=shield&circle-token=:circle-token)
 
 ## Install
+
 ```bash
-gem install bundler_dependency_matrix
+gem install hellgrid
 ```
 
 ## Usage
+
 Let say that you have a directory `/path/to/root/dir` somewhere in which the Ruby projects `foo` and `bar` could be found.
 
 Executing:
 ```bash
-bundler_dependency_matrix /path/to/root/dir
+hellgrid /path/to/root/dir
 ```
 
 Should result in:
@@ -27,5 +30,5 @@ Should result in:
         rspec-mocks        | 2.0.0  | 3.0.4
            rake            | 10.0.0 | 11.1.0
        rspec-support       |   x    | 3.0.4
- bundler_dependency_matrix |   x    |   x
+ hellgrid |   x    |   x
 ```

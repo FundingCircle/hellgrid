@@ -1,4 +1,4 @@
-module BundlerDependencyMatrix
+module Hellgrid
   class Project
     attr_reader :path
 
