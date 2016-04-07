@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
-  s.homepage      = 'http://github.com/dobrinov/hellgrid'
+  s.homepage      = 'http://github.com/FundingCircle/hellgrid'
   s.license       = 'MIT'
 
   s.add_development_dependency 'rspec', '~> 3.4', '>= 3.4.0'
