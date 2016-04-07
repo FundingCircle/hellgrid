@@ -30,5 +30,5 @@ Should result in:
         rspec-mocks        | 2.0.0  | 3.0.4
            rake            | 10.0.0 | 11.1.0
        rspec-support       |   x    | 3.0.4
- hellgrid |   x    |   x
+          hellgrid         |   x    |   x
 ```
