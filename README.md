@@ -2,7 +2,7 @@
 
 Utility which will output a table containing gem versions used across your projects.
 
-![Build Status](https://circleci.com/gh/dobrinov/hellgrid.svg?style=shield&circle-token=:circle-token)
+![Build Status](https://circleci.com/gh/FundingCircle/hellgrid.svg?style=shield&circle-token=:circle-token)
 
 ## Install
 
