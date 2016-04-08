@@ -9,7 +9,9 @@ require 'find'
 
 require 'hellgrid'
 
-ARGV.each do |folder|
+folders = ARGV.empty? ? [Dir.pwd] : ARGV
+
+folders.each do |folder|
   matrix = Hellgrid::Matrix.new
 
   Find.find(folder) do |path|

@@ -92,4 +92,22 @@ TABLE
       expect(`cd ~ && #{PROJECT_ROOT}/bin/hellgrid #{PROJECT_ROOT}/spec/tmp`).to eq(expected_result)
     end
   end
+
+  it 'uses the current working directory by default' do
+    expected_result = <<-TABLE
+         x          |  bar   | in/foo 
+--------------------+--------+--------
+      diff-lcs      | 1.2.5  | 1.2.5  
+        rake        | 10.0.0 | 11.1.0 
+       rspec        | 2.0.0  | 3.0.0  
+     rspec-core     | 2.0.0  | 3.0.4  
+ rspec-expectations | 2.0.0  | 3.0.4  
+    rspec-mocks     | 2.0.0  | 3.0.4  
+   rspec-support    |   x    | 3.0.4  
+TABLE
+
+    Bundler.with_clean_env do
+      expect(`cd #{PROJECT_ROOT}/spec/tmp && #{PROJECT_ROOT}/bin/hellgrid`).to eq(expected_result)
+    end
+  end
 end
