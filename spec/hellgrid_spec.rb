@@ -123,7 +123,7 @@ describe 'bin/hellgrid' do
           rspec-mocks     |                      3.4.1                       |    2.0.0     |      3.0.4      
               rake        |                        x                         |    10.0.0    |     11.1.0      
          rspec-support    |                      3.4.1                       |      x       |      3.0.4      
-            hellgrid      |                      0.1.0                       |      x       |        x        
+            hellgrid      |                      0.2.0                       |      x       |        x        
     TABLE
 
     Bundler.with_clean_env do

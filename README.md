@@ -19,6 +19,11 @@ Executing:
 hellgrid /path/to/root/dir
 ```
 
+To search recursively (should you have nested projects), use the `-r ` flag:
+```
+hellgrid -r /path/to/root/dir
+```
+
 Should result in:
 ```bash
              x             |  bar   |  foo
