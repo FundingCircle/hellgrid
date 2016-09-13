@@ -110,4 +110,24 @@ describe 'bin/hellgrid' do
       expect(`cd #{PROJECT_ROOT}/spec/tmp && #{PROJECT_ROOT}/bin/hellgrid`).to eq(expected_result)
     end
   end
+
+  it 'searches recursively within folders if you flag it to' do
+    expected_result =
+    <<~TABLE
+               x          | /Users/sashacooper/Desktop/pogroms/jobs/hellgrid | spec/tmp/bar | spec/tmp/in/foo 
+      --------------------+--------------------------------------------------+--------------+-----------------
+            diff-lcs      |                      1.2.5                       |    1.2.5     |      1.2.5      
+             rspec        |                      3.4.0                       |    2.0.0     |      3.0.0      
+           rspec-core     |                      3.4.2                       |    2.0.0     |      3.0.4      
+       rspec-expectations |                      3.4.0                       |    2.0.0     |      3.0.4      
+          rspec-mocks     |                      3.4.1                       |    2.0.0     |      3.0.4      
+              rake        |                        x                         |    10.0.0    |     11.1.0      
+         rspec-support    |                      3.4.1                       |      x       |      3.0.4      
+            hellgrid      |                      0.1.0                       |      x       |        x        
+    TABLE
+
+    Bundler.with_clean_env do
+      expect(`cd #{PROJECT_ROOT} && hellgrid -r`).to eq(expected_result)
+    end
+  end
 end
