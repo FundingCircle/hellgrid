@@ -10,33 +10,33 @@ describe Hellgrid::Project do
   before do
     delete_tmp_folder
 
-    create_file lockfile_path, <<-FOO_GEMFILE
-GEM
-  remote: https://rubygems.org/
-  specs:
-    diff-lcs (1.2.5)
-    rake (11.1.0)
-    rspec (3.0.0)
-      rspec-core (~> 3.0.0)
-      rspec-expectations (~> 3.0.0)
-      rspec-mocks (~> 3.0.0)
-    rspec-core (3.0.4)
-      rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.4)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.4)
-      rspec-support (~> 3.0.0)
-    rspec-support (3.0.4)
+    create_file lockfile_path,  <<~FOO_GEMFILE
+                                  GEM
+                                    remote: https://rubygems.org/
+                                    specs:
+                                      diff-lcs (1.2.5)
+                                      rake (11.1.0)
+                                      rspec (3.0.0)
+                                        rspec-core (~> 3.0.0)
+                                        rspec-expectations (~> 3.0.0)
+                                        rspec-mocks (~> 3.0.0)
+                                      rspec-core (3.0.4)
+                                        rspec-support (~> 3.0.0)
+                                      rspec-expectations (3.0.4)
+                                        diff-lcs (>= 1.2.0, < 2.0)
+                                        rspec-support (~> 3.0.0)
+                                      rspec-mocks (3.0.4)
+                                        rspec-support (~> 3.0.0)
+                                      rspec-support (3.0.4)
 
-PLATFORMS
-  ruby
+                                  PLATFORMS
+                                    ruby
 
-DEPENDENCIES
-  rake (= 11.1.0)
-  rspec (= 3.0.0)
+                                  DEPENDENCIES
+                                    rake (= 11.1.0)
+                                    rspec (= 3.0.0)
 
-FOO_GEMFILE
+                                FOO_GEMFILE
   end
 
   describe '#name' do

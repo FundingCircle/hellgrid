@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/FundingCircle/hellgrid'
   s.license       = 'MIT'
 
+  s.required_ruby_version = '>= 2.3.1'
   s.add_development_dependency 'rspec', '~> 3.4', '>= 3.4.0'
   s.add_development_dependency 'bundler', '~> 1.11', '>= 1.11.0'
 end
