@@ -7,7 +7,7 @@ require 'hellgrid/version'
 Gem::Specification.new do |s|
   s.name          = 'hellgrid'
   s.version       = Hellgrid::VERSION
-  s.date          = '2016-03-28'
+  s.date          = '2016-09-20'
   s.summary       = 'Gem version dependency matrix'
   s.description   = ''
   s.authors       = ['Deyan Dobrinov', 'Aleksandar Ivanov']
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(/^spec\//)
   s.require_paths = ['lib']
   s.homepage      = 'https://github.com/FundingCircle/hellgrid'
-  s.license       = 'MIT'
+  s.license       = 'BSD-3'
 
   s.add_development_dependency 'rspec', '~> 3.4', '>= 3.4.0'
   s.add_development_dependency 'bundler', '~> 1.11', '>= 1.11.0'

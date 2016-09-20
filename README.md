@@ -32,3 +32,9 @@ Should result in:
        rspec-support       |   x    | 3.0.4
           hellgrid         |   x    |   x
 ```
+
+## License
+
+Copyright © 2016 Funding Circle.
+
+Distributed under the BSD 3-Clause License.
