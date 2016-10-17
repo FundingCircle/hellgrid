@@ -110,4 +110,22 @@ TABLE
       expect(`cd #{PROJECT_ROOT}/spec/tmp && #{PROJECT_ROOT}/bin/hellgrid`).to eq(expected_result)
     end
   end
+
+  context 'when passing -r' do
+    it 'searches recursively within folders if you flag it to' do
+      Bundler.with_clean_env do
+        expect(`cd #{PROJECT_ROOT} && #{PROJECT_ROOT}/bin/hellgrid -r`).to(
+          include(
+            'hellgrid',
+            'spec/tmp/bar',
+            'spec/tmp/in/foo',
+            'rspec',
+            '3.4.0',
+            '2.0.0',
+            '3.0.0'
+          )
+        )
+      end
+    end
+  end
 end
