@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(/^spec\//)
   s.require_paths = ['lib']
   s.homepage      = 'https://github.com/FundingCircle/hellgrid'
-  s.license       = 'BSD-3'
+  s.license       = 'BSD-3-Clause'
 
   s.add_development_dependency 'rspec', '~> 3.4', '>= 3.4.0'
   s.add_development_dependency 'bundler', '~> 1.11', '>= 1.11.0'
