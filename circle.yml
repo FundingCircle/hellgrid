@@ -1,26 +1,34 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/hellgrid
+  docker:
+    - image: ruby:2.5-alpine
+  environment:
+    BUNDLE_APP_CONFIG: ~/hellgrid/.bundle
+
 jobs:
   build:
-    docker:
-      - image: ruby:2.4-alpine
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
-      - run: bundle check --path=vendor/bundle || bundle install --jobs=4 --path=vendor/bundle --retry=3
+      - run: bundle config --local path vendor/bundle
+      - run: bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
           paths:
             - vendor/bundle
       - run: bundle exec rspec spec --format progress
   deploy:
-    docker:
-      - image: ruby:2.4-alpine
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
-      - run: bundle check --path=vendor/bundle || bundle install --jobs=4 --path=vendor/bundle --retry=3
+      - run: bundle config --local path vendor/bundle
+      - run: bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
           paths:
