@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/FundingCircle/hellgrid'
   s.license       = 'BSD-3-Clause'
 
+  s.add_runtime_dependency 'bundler', ['>= 1.11.0', '< 1.17']
+
   s.add_development_dependency 'rspec', '~> 3.4', '>= 3.4.0'
-  s.add_development_dependency 'bundler', '~> 1.11', '>= 1.11.0'
 end
