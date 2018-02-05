@@ -11,8 +11,9 @@ Gem::Specification.new do |s|
   s.summary       = 'Gem version dependency matrix'
   s.authors       = ['Deyan Dobrinov', 'Aleksandar Ivanov']
   s.email         = ['engineering+hellgrid@fundingcircle.com']
-  s.files         = Dir.chdir(project_root) { Dir['lib/**/*.rb'] + Dir['bin/*'] + Dir['spec/**/*.rb'] + %w(Gemfile Gemfile.lock README.md hellgrid.gemspec) }
-  s.executables   = s.files.grep(/^bin\//) { |f| File.basename(f) }
+  s.files         = Dir.chdir(project_root) { Dir['lib/**/*.rb'] + Dir['bin/*'] + Dir['exe/*'] + Dir['spec/**/*.rb'] + %w(Gemfile Gemfile.lock README.md hellgrid.gemspec) }
+  s.bindir        = 'exe'
+  s.executables   = s.files.grep(/^exe\//) { |f| File.basename(f) }
   s.test_files    = s.files.grep(/^spec\//)
   s.require_paths = ['lib']
   s.homepage      = 'https://github.com/FundingCircle/hellgrid'
