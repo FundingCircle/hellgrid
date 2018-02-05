@@ -1,7 +1,49 @@
-machine:
-  ruby:
-    version: 2.3.0
+version: 2
 
-dependencies:
-  pre:
-    - gem install bundler -v 1.11.2
+defaults: &defaults
+  working_directory: ~/hellgrid
+  docker:
+    - image: ruby:2.5-alpine
+  environment:
+    BUNDLE_APP_CONFIG: ~/hellgrid/.bundle
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: hellgrid-{{ checksum "hellgrid.gemspec" }}
+      - run: bundle config --local path vendor/bundle
+      - run: bundle check || bundle install --jobs=4 --retry=3
+      - save_cache:
+          key: hellgrid-{{ checksum "hellgrid.gemspec" }}
+          paths:
+            - vendor/bundle
+      - run: bundle exec rspec spec --format progress
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: hellgrid-{{ checksum "hellgrid.gemspec" }}
+      - run: bundle config --local path vendor/bundle
+      - run: bundle check || bundle install --jobs=4 --retry=3
+      - save_cache:
+          key: hellgrid-{{ checksum "hellgrid.gemspec" }}
+          paths:
+            - vendor/bundle
+      - deploy:
+          name: Publish to RubyGems
+          command: |
+            if [ "$$CIRCLE_BRANCH" == "master" ]; then
+              gem build ${CIRCLE_PROJECT_REPONAME}.gemspec
+            else
+              PRE_RELEASE="$CIRCLE_BRANCH" gem build ${CIRCLE_PROJECT_REPONAME}.gemspec
+            fi
+
+            curl --fail --form package=@$(ls -t1 ${CIRCLE_PROJECT_REPONAME}-*.gem | head -1) "$GEMFURY_PUSH_URI"
+deployment:
+  rubygems:
+    owner: FundingCircle
+    tag: /.*/
