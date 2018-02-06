@@ -2,7 +2,8 @@
 
 Utility which will output a table containing gem versions used across your projects.
 
-![Build Status](https://circleci.com/gh/FundingCircle/hellgrid.svg?style=shield&circle-token=:circle-token)
+[![Build Status`](https://circleci.com/gh/FundingCircle/hellgrid.svg?style=svg)](https://circleci.com/gh/FundingCircle/hellgrid)
+[![Maintainability](https://api.codeclimate.com/v1/badges/13deecf7ca1f69197cbe/maintainability)](https://codeclimate.com/github/FundingCircle/hellgrid/maintainability)
 
 ## Install
 
