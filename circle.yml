@@ -52,7 +52,22 @@ jobs:
             fi
 
             curl --fail --form package=@$(ls -t1 ${CIRCLE_PROJECT_REPONAME}-*.gem | head -1) "$GEMFURY_PUSH_URI"
-deployment:
-  rubygems:
-    owner: FundingCircle
-    tag: /.*/
+
+workflows:
+  version: 2
+  build-n-deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
