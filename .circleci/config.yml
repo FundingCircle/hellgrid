@@ -11,7 +11,7 @@ jobs:
   test:
     <<: *defaults
     steps:
-      - run: apk --no-cache add git
+      - run: apk --no-cache add curl git
       - checkout
       - restore_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
@@ -41,7 +41,7 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-      - run: apk --no-cache add git curl
+      - run: apk --no-cache add curl git
       - checkout
       - restore_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
