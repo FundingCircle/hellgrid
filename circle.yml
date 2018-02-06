@@ -21,6 +21,13 @@ jobs:
           paths:
             - vendor/bundle
       - run: bundle exec rspec spec --format progress
+      - run:
+          name: Make sure that the gem runs when installed
+          command: |
+            set -e
+            gem build 'hellgrid.gemspec'
+            gem install $(ls -t1 hellgrid-*.gem | head -1)
+            cd ~ && hellgrid
   deploy:
     <<: *defaults
     steps:

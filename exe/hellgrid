@@ -3,10 +3,7 @@
 require 'pathname'
 # XXX: BUNDLE_GEMFILE should be provided because the internals of bundler require a 'Gemfile' or '.bundle' to
 # work properly. Without this the script will fail if there isn't a Gemfile somewhere up the directory chain
-ENV['BUNDLE_GEMFILE'] ||= File.join(File.expand_path('../..', Pathname.new(__FILE__).realpath), 'Gemfile')
-
-require 'rubygems'
-require 'bundler/setup'
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', Pathname.new(__FILE__).realpath)
 
 require 'hellgrid'
 
