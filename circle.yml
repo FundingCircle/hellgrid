@@ -8,7 +8,7 @@ defaults: &defaults
     BUNDLE_APP_CONFIG: ~/hellgrid/.bundle
 
 jobs:
-  build:
+  test:
     <<: *defaults
     steps:
       - run: apk --no-cache add git
@@ -52,7 +52,22 @@ jobs:
             fi
 
             curl --fail --form package=@$(ls -t1 ${CIRCLE_PROJECT_REPONAME}-*.gem | head -1) "$GEMFURY_PUSH_URI"
-deployment:
-  rubygems:
-    owner: FundingCircle
-    tag: /.*/
+
+workflows:
+  version: 2
+  test-n-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
