@@ -11,7 +11,7 @@ jobs:
   test:
     <<: *defaults
     steps:
-      - run: apk --no-cache add git
+      - run: apk --no-cache add curl git
       - checkout
       - restore_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
@@ -21,7 +21,16 @@ jobs:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
           paths:
             - vendor/bundle
-      - run: bundle exec rspec spec --format progress
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rspec spec --format progress
+            ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
       - run:
           name: Make sure that the gem runs when installed
           command: |
@@ -32,7 +41,7 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-      - run: apk --no-cache add git curl
+      - run: apk --no-cache add curl git
       - checkout
       - restore_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}

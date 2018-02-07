@@ -1,3 +1,4 @@
 Gemfile.lock
 hellgrid-*.gem
 spec/tmp
+coverage/

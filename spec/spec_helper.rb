@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'fileutils'
 require 'hellgrid'
 require 'hellgrid/project'
