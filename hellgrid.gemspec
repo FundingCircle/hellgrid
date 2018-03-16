@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bundler', ['>= 1.11.0', '< 1.17']
 
   s.add_development_dependency 'rspec', '~> 3.7.0'
-  s.add_development_dependency 'simplecov', '~> 0.15.1'
+  s.add_development_dependency 'simplecov', '~> 0.16.0'
 end
