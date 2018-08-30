@@ -7,7 +7,6 @@ require 'hellgrid/version'
 Gem::Specification.new do |s|
   s.name          = 'hellgrid'
   s.version       = Hellgrid::VERSION
-  s.date          = '2016-09-20'
   s.summary       = 'Gem version dependency matrix'
   s.authors       = ['Deyan Dobrinov', 'Aleksandar Ivanov']
   s.email         = ['engineering+hellgrid@fundingcircle.com']
