@@ -6,18 +6,26 @@ defaults: &defaults
     - image: ruby:2.5-alpine
   environment:
     BUNDLE_APP_CONFIG: ~/hellgrid/.bundle
+    BUNDLE_PATH: ~/hellgrid/vendor/bundle
+    BUNDLE_JOBS: 4
+    BUNDLE_RETRY: 3
 
 jobs:
   test:
     <<: *defaults
     steps:
-      - run: apk --no-cache add curl git
+      - &install_packages
+        run: apk --no-cache add curl git
       - checkout
-      - restore_cache:
+      - &restore_gems
+        restore_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
-      - run: bundle config --local path vendor/bundle
-      - run: bundle check || bundle install --jobs=4 --retry=3
-      - save_cache:
+      - &bundle_install
+        run: |
+          bundle config --local path "$BUNDLE_PATH"
+          bundle check || bundle install
+      - &cache_gems
+        save_cache:
           key: hellgrid-{{ checksum "hellgrid.gemspec" }}
           paths:
             - vendor/bundle
@@ -38,29 +46,24 @@ jobs:
             gem build 'hellgrid.gemspec'
             gem install $(ls -t1 hellgrid-*.gem | head -1)
             cd ~ && hellgrid
-  deploy:
+  push-to-rubygems:
     <<: *defaults
     steps:
-      - run: apk --no-cache add curl git
+      - *install_packages
       - checkout
-      - restore_cache:
-          key: hellgrid-{{ checksum "hellgrid.gemspec" }}
-      - run: bundle config --local path vendor/bundle
-      - run: bundle check || bundle install --jobs=4 --retry=3
-      - save_cache:
-          key: hellgrid-{{ checksum "hellgrid.gemspec" }}
-          paths:
-            - vendor/bundle
+      - *restore_gems
+      - *bundle_install
+      - *cache_gems
+      - run:
+          name: Build the gem
+          command: gem build $CIRCLE_PROJECT_REPONAME.gemspec
       - deploy:
           name: Publish to RubyGems
           command: |
-            if [ "$$CIRCLE_BRANCH" == "master" ]; then
-              gem build ${CIRCLE_PROJECT_REPONAME}.gemspec
-            else
-              PRE_RELEASE="$CIRCLE_BRANCH" gem build ${CIRCLE_PROJECT_REPONAME}.gemspec
-            fi
-
-            curl --fail --form package=@$(ls -t1 ${CIRCLE_PROJECT_REPONAME}-*.gem | head -1) "$GEMFURY_PUSH_URI"
+            mkdir ~/.gem
+            echo ":rubygems_api_key: $RUBYGEMS_API_KEY" >  ~/.gem/credentials
+            chmod 0600 ~/.gem/credentials
+            gem push $CIRCLE_PROJECT_REPONAME-$(echo $CIRCLE_TAG | sed -e 's/v//').gem
 
 workflows:
   version: 2
@@ -72,11 +75,12 @@ workflows:
               only: /.*/
             branches:
               only: /.*/
-      - deploy:
+      - push-to-rubygems:
+          context: org-global
           requires:
             - test
           filters:
             tags:
-              only: /.*/
+              only: /^v\d.+/
             branches:
               ignore: /.*/
