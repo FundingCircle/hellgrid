@@ -15,7 +15,7 @@ jobs:
     <<: *defaults
     steps:
       - &install_packages
-        run: apk --no-cache add curl git
+        run: apk --no-cache add curl git openssh-client
       - checkout
       - &restore_gems
         restore_cache:
