@@ -7,8 +7,8 @@ require 'hellgrid/version'
 Gem::Specification.new do |s|
   s.name          = 'hellgrid'
   s.version       = Hellgrid::VERSION
-  s.date          = '2016-09-20'
   s.summary       = 'Gem version dependency matrix'
+  s.description   = 'Display gem versions used across your projects in a table'
   s.authors       = ['Deyan Dobrinov', 'Aleksandar Ivanov']
   s.email         = ['engineering+hellgrid@fundingcircle.com']
   s.files         = Dir.chdir(project_root) { Dir['lib/**/*.rb'] + Dir['bin/*'] + Dir['exe/*'] + Dir['spec/**/*.rb'] + %w(Gemfile Gemfile.lock README.md hellgrid.gemspec) }
