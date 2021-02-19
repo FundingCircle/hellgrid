@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe 'bin/hellgrid' do
+  def with_unbundled_env(&block)
+    if Bundler.respond_to?(:with_unbundled_env)
+      Bundler.with_unbundled_env(&block)
+    else
+      Bundler.with_clean_env(&block)
+    end
+  end
+
   before do
     delete_tmp_folder
 
@@ -88,7 +96,7 @@ TABLE
    rspec-support    |   x    | 3.0.4  
 TABLE
 
-    Bundler.with_clean_env do
+    with_unbundled_env do
       expect(`cd ~ && #{PROJECT_ROOT}/bin/hellgrid #{PROJECT_ROOT}/spec/tmp`).to eq(expected_result)
     end
   end
@@ -106,14 +114,14 @@ TABLE
    rspec-support    |   x    | 3.0.4  
 TABLE
 
-    Bundler.with_clean_env do
+    with_unbundled_env do
       expect(`cd #{PROJECT_ROOT}/spec/tmp && #{PROJECT_ROOT}/bin/hellgrid`).to eq(expected_result)
     end
   end
 
   context 'when passing -r' do
     it 'searches recursively within folders if you flag it to' do
-      Bundler.with_clean_env do
+      with_unbundled_env do
         expect(`cd #{PROJECT_ROOT} && #{PROJECT_ROOT}/bin/hellgrid -r`.lines.first).to(
           include(
             'hellgrid',
