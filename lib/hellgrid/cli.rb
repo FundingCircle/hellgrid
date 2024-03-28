@@ -18,7 +18,7 @@ module Hellgrid
         matrix = Hellgrid::Matrix.new
 
         Find.find(folder) do |path|
-          if File.directory?(path) && File.exists?(File.join(path, 'Gemfile.lock'))
+          if File.directory?(path) && File.exist?(File.join(path, 'Gemfile.lock'))
             matrix.add_project(Hellgrid::Project.new(folder, path))
             Find.prune unless recursive_search
           end

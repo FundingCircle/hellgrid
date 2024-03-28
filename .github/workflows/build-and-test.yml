@@ -1,0 +1,38 @@
+name: Build & Test
+run-name:  Build & Test - ${{ github.ref_name }}
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    if: "!contains(github.ref, 'master')"
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Gem versioned correctly
+        shell: sh
+        run: |
+          CHANGED=$(git diff origin/master HEAD --name-only | grep 'lib/hellgrid') || exit 0
+          [[ -z "$CHANGED" ]] || (echo "$CHANGED" | grep 'version.rb') || exit 1
+
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: Run tests
+        run: bundle exec rspec
