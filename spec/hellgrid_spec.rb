@@ -132,4 +132,19 @@ TABLE
       end
     end
   end
+
+  context 'when passing -t' do
+    it 'transposes the result and the project names on the left' do
+      expected_result = <<-TABLE
+   x    | diff-lcs |  rake  | rspec | rspec-core | rspec-expectations | rspec-mocks | rspec-support 
+--------+----------+--------+-------+------------+--------------------+-------------+---------------
+  bar   |  1.2.5   | 10.0.0 | 2.0.0 |   2.0.0    |       2.0.0        |    2.0.0    |       x       
+ in/foo |  1.2.5   | 11.1.0 | 3.0.0 |   3.0.4    |       3.0.4        |    3.0.4    |     3.0.4     
+TABLE
+
+      with_unbundled_env do
+        expect(`cd #{PROJECT_ROOT}/spec/tmp && #{PROJECT_ROOT}/bin/hellgrid -t`).to eq(expected_result)
+      end
+    end
+  end
 end

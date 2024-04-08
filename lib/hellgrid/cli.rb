@@ -12,6 +12,8 @@ module Hellgrid
 
     def start
       recursive_search = !!(argv.delete('-r'))
+      transpose = !!(argv.delete('-t'))
+
       folders = argv.empty? ? [Dir.pwd] : argv
 
       folders.each do |folder|
@@ -24,7 +26,10 @@ module Hellgrid
           end
         end
 
-        view = Hellgrid::Views::Console.new(matrix.sorted_by_most_used)
+        data = matrix.sorted_by_most_used
+        data = data.transpose if transpose
+
+        view = Hellgrid::Views::Console.new(data)
 
         view.render
       end
