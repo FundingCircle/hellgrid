@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 require 'hellgrid'
 require 'hellgrid/project'
 require 'hellgrid/matrix'
 require 'hellgrid/views/console'
 
-PROJECT_ROOT = File.expand_path('../..', __FILE__)
+PROJECT_ROOT = File.expand_path('..', __dir__)
 
 def create_file(path, content)
   full_path = File.join(PROJECT_ROOT, path)

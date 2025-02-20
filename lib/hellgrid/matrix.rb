@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hellgrid
   class Matrix
     attr_reader :projects
@@ -11,7 +13,7 @@ module Hellgrid
     end
 
     def projects_sorted_by_name
-      @projects.sort { |a,b| a.name <=> b.name }
+      @projects.sort { |a, b| a.name <=> b.name }
     end
 
     def project_names
@@ -36,12 +38,12 @@ module Hellgrid
       gem_usage = Hash.new(0)
 
       projects.each do |project|
-        project.dependency_matrix.each do |gem, _|
+        project.dependency_matrix.each_key do |gem|
           gem_usage[gem] += 1
         end
       end
 
-      gem_usage.sort_by {|key, value| [-value, key] }.to_h
+      gem_usage.sort_by { |key, value| [-value, key] }.to_h
     end
   end
 end
