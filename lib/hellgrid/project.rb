@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hellgrid
   class Project
     attr_reader :path
@@ -8,11 +10,11 @@ module Hellgrid
     end
 
     def name
-      File.expand_path(path).gsub(File.expand_path(root) + '/', '')
+      File.expand_path(path).gsub("#{File.expand_path(root)}/", '')
     end
 
     def dependency_matrix
-      @dependency_matrix ||= specs.inject(Hash.new) { |h,spec| h.merge!(spec.name.to_s => spec.version.version) }
+      @dependency_matrix ||= specs.inject({}) { |h, spec| h.merge!(spec.name.to_s => spec.version.version) }
     end
 
     private

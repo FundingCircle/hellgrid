@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'pathname'
 # XXX: BUNDLE_GEMFILE should be provided because the internals of bundler require a 'Gemfile' or '.bundle' to

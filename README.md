@@ -3,6 +3,7 @@
 Utility which will output a table containing gem versions used across your projects.
 
 [![Build & Test](https://github.com/FundingCircle/hellgrid/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/FundingCircle/hellgrid/actions/workflows/build-and-test.yml)
+[![Gem Version](https://badge.fury.io/rb/hellgrid.svg)](https://badge.fury.io/rb/hellgrid)
 
 ## Install
 

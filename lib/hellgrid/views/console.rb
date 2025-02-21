@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hellgrid
   module Views
     class Console
@@ -21,7 +23,7 @@ module Hellgrid
           string << row_as_string(row)
         end
 
-        string.join("\n") + "\n"
+        "#{string.join("\n")}\n"
       end
 
       private
@@ -35,9 +37,7 @@ module Hellgrid
 
         matrix.each do |row|
           row.each_with_index do |value, col_i|
-            if value && (widths[col_i] < value.size)
-              widths[col_i] = value.size
-            end
+            widths[col_i] = value.size if value && (widths[col_i] < value.size)
           end
         end
 

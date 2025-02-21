@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hellgrid
   class CLI
     def self.start(argv = ARGV)
@@ -11,8 +13,8 @@ module Hellgrid
     attr_reader :argv
 
     def start
-      recursive_search = !!(argv.delete('-r'))
-      transpose = !!(argv.delete('-t'))
+      recursive_search = !argv.delete('-r').nil?
+      transpose = !argv.delete('-t').nil?
 
       folders = argv.empty? ? [Dir.pwd] : argv
 
