@@ -1,4 +1,4 @@
-# Hellgrid
+# Hellgrid.
 
 Utility which will output a table containing gem versions used across your projects.
 
